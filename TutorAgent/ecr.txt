@@ -1,0 +1,329 @@
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:38.326111 Running on CodeBuild On-demand
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:38.326202 Waiting for agent ping
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:38.472866 Waiting for DOWNLOAD_SOURCE
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.462500 Phase is DOWNLOAD_SOURCE
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.463463 CODEBUILD_SRC_DIR=/codebuild/output/src2309319277/src
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.463868 YAML location is /codebuild/readonly/buildspec.yml
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.465438 Setting HTTP client timeout to higher timeout for S3 source
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.465513 Processing environment variables
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.542682 No runtime version selected in buildspec.
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.573193 Moving to directory /codebuild/output/src2309319277/src
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.573295 Cache is not defined in the buildspec
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.615126 Skip cache due to: no paths specified to be cached
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.615439 Registering with agent
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.653174 Phases found in YAML: 3
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.653193  BUILD: 2 commands
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.653196  POST_BUILD: 3 commands
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.653198  PRE_BUILD: 2 commands
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.653497 Phase complete: DOWNLOAD_SOURCE State: SUCCEEDED
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.653511 Phase context status code:  Message:
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.766206 Entering phase INSTALL
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.804786 Phase complete: INSTALL State: SUCCEEDED
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.804804 Phase context status code:  Message:
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.846415 Entering phase PRE_BUILD
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.884287 Running command echo "Logging in to Amazon ECR..."
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 Logging in to Amazon ECR...
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:43.504000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:39.890371 Running command aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 Configure a credential helper to remove this warning. See
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 https://docs.docker.com/go/credential-store/
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 Login Succeeded
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:48.056022 Phase complete: PRE_BUILD State: SUCCEEDED
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:48.056036 Phase context status code:  Message:
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:48.095355 Entering phase BUILD
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:48.096438 Running command echo "Building container image..."
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 Building container image...
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 [Container] 2026/08/17 06:42:48.102400 Running command docker build -t $IMAGE_URI -f $DOCKERFILE_PATH $BUILD_ARG_FLAGS .
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #0 building with "default" instance using docker driver
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #1 [internal] load build definition from Dockerfile
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #1 transferring dockerfile: 1.44kB done
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #1 WARN: FromPlatformFlagConstDisallowed: FROM --platform flag should not use constant value "linux/arm64" (line 4)
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #1 WARN: FromPlatformFlagConstDisallowed: FROM --platform flag should not use constant value "linux/arm64" (line 15)
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #1 DONE 0.0s
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:49.545000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #2 [internal] load metadata for docker.io/library/node:22-slim
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #2 DONE 2.0s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #3 [internal] load .dockerignore
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #3 transferring context: 96B done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #3 DONE 0.0s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #4 [internal] load build context
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #4 transferring context: 156.60kB done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #4 DONE 0.0s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 [build 1/6] FROM docker.io/library/node:22-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 resolve docker.io/library/node:22-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436 done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:b28fd44f3b09a88e94656328936fdee99f4180acf9bfb7bff95faa38ff9fb404 0B / 3.31kB 0.1s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:eb6939232e6e9b4aacb21d276fffaff9f7d8b5e37c831a41b37c8886a244c897 0B / 50.06MB 0.1s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436 5.22kB / 5.22kB done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:253da19867dd03e2f817f433d7782adefd2a2bac8729fcd4ebc6770665167a24 1.93kB / 1.93kB done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:e00760d5c626959056a007c5243fedcf0c7f521eb68a49b031211f3466837433 6.89kB / 6.89kB done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:0f5d7465a5bb9d419f60c93d126a161286c73a1ede4a8b2e46bd5e7ad5782cc7 0B / 28.12MB 0.1s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:0f5d7465a5bb9d419f60c93d126a161286c73a1ede4a8b2e46bd5e7ad5782cc7 26.22MB / 28.12MB 0.3s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:0f5d7465a5bb9d419f60c93d126a161286c73a1ede4a8b2e46bd5e7ad5782cc7 28.12MB / 28.12MB 0.3s done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:c75449d0025c18d8f273afd3a19b1f23caa138038c66ffe67ca5b05c1be8a569 0B / 1.71MB 0.4s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:0f5d7465a5bb9d419f60c93d126a161286c73a1ede4a8b2e46bd5e7ad5782cc7
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:b28fd44f3b09a88e94656328936fdee99f4180acf9bfb7bff95faa38ff9fb404 3.31kB / 3.31kB 0.5s done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:759f4bef14787129bcbf26f644e23b0be09d97d120b34cafc77d8a872fe54e60 0B / 445B 0.5s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:eb6939232e6e9b4aacb21d276fffaff9f7d8b5e37c831a41b37c8886a244c897 16.78MB / 50.06MB 0.7s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:c75449d0025c18d8f273afd3a19b1f23caa138038c66ffe67ca5b05c1be8a569 1.71MB / 1.71MB 0.7s done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:eb6939232e6e9b4aacb21d276fffaff9f7d8b5e37c831a41b37c8886a244c897 47.19MB / 50.06MB 0.8s
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:759f4bef14787129bcbf26f644e23b0be09d97d120b34cafc77d8a872fe54e60 445B / 445B 0.7s done
+2026-08-17T06:42:51.559000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 sha256:eb6939232e6e9b4aacb21d276fffaff9f7d8b5e37c831a41b37c8886a244c897 50.06MB / 50.06MB 0.9s done
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:0f5d7465a5bb9d419f60c93d126a161286c73a1ede4a8b2e46bd5e7ad5782cc7 1.0s done
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:b28fd44f3b09a88e94656328936fdee99f4180acf9bfb7bff95faa38ff9fb404 done
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:eb6939232e6e9b4aacb21d276fffaff9f7d8b5e37c831a41b37c8886a244c897
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:eb6939232e6e9b4aacb21d276fffaff9f7d8b5e37c831a41b37c8886a244c897 1.0s done
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:c75449d0025c18d8f273afd3a19b1f23caa138038c66ffe67ca5b05c1be8a569 0.1s done
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 extracting sha256:759f4bef14787129bcbf26f644e23b0be09d97d120b34cafc77d8a872fe54e60 done
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #5 DONE 2.8s
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:53.575000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 [stage-1 2/8] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     fonts-liberation     libasound2     libatk-bridge2.0-0     libatk1.0-0     libcups2     libdrm2     libgbm1     libgtk-3-0     libnspr4     libnss3     libxcomposite1     libxdamage1     libxfixes3     libxkbcommon0     libxrandr2     xdg-utils     && rm -rf /var/lib/apt/lists/*
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 ...
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #7 [build 2/6] WORKDIR /app
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #7 DONE 1.5s
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #8 [build 3/6] COPY package.json package-lock.json ./
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #8 DONE 0.3s
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 [stage-1 2/8] RUN apt-get update && apt-get install -y --no-install-recommends     ca-certificates     fonts-liberation     libasound2     libatk-bridge2.0-0     libatk1.0-0     libcups2     libdrm2     libgbm1     libgtk-3-0     libnspr4     libnss3     libxcomposite1     libxdamage1     libxfixes3     libxkbcommon0     libxrandr2     xdg-utils     && rm -rf /var/lib/apt/lists/*
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 1.757 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 1.764 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 1.765 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 1.829 Get:4 http://deb.debian.org/debian bookworm/main arm64 Packages [8689 kB]
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 1.939 Get:5 http://deb.debian.org/debian bookworm-updates/main arm64 Packages [6936 B]
+2026-08-17T06:42:55.590000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 1.972 Get:6 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages [335 kB]
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 2.684 Fetched 9272 kB in 1s (9932 kB/s)
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 2.684 Reading package lists...
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.164 Reading package lists...
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.638 Building dependency tree...
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.762 Reading state information...
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.915 The following additional packages will be installed:
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.915   adwaita-icon-theme at-spi2-common dbus dbus-bin dbus-daemon
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.915   dbus-session-bus-common dbus-system-bus-common dbus-user-session
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.916   dconf-gsettings-backend dconf-service dmsetup fontconfig fontconfig-config
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.916   gtk-update-icon-cache hicolor-icon-theme libapparmor1 libargon2-1
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.916   libasound2-data libatspi2.0-0 libavahi-client3 libavahi-common-data
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.916   libavahi-common3 libbrotli1 libbsd0 libcairo-gobject2 libcairo2 libcolord2
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.917   libcryptsetup12 libdatrie1 libdbus-1-3 libdconf1 libdeflate0
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.917   libdevmapper1.02.1 libdrm-common libepoxy0 libexpat1 libfdisk1
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.917   libfontconfig1 libfreetype6 libfribidi0 libgdk-pixbuf-2.0-0
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.917   libgdk-pixbuf2.0-common libglib2.0-0 libgraphite2-3 libgssapi-krb5-2
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.918   libgtk-3-common libharfbuzz0b libicu72 libip4tc2 libjbig0 libjpeg62-turbo
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.918   libjson-c5 libk5crypto3 libkeyutils1 libkmod2 libkrb5-3 libkrb5support0
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.918   liblcms2-2 liblerc4 libncursesw6 libpam-systemd libpango-1.0-0
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.919   libpangocairo-1.0-0 libpangoft2-1.0-0 libpixman-1-0 libpng16-16 libproc2-0
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.919   libsqlite3-0 libssl3 libsystemd-shared libthai-data libthai0 libtiff6
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.919   libwayland-client0 libwayland-cursor0 libwayland-egl1 libwayland-server0
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.919   libwebp7 libx11-6 libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.920   libxcursor1 libxdmcp6 libxext6 libxi6 libxinerama1 libxml2 libxrender1
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.920   openssl procps shared-mime-info systemd systemd-sysv xkb-data
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.921 Suggested packages:
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.921   libasound2-plugins alsa-utils colord cups-common low-memory-monitor krb5-doc
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.921   krb5-user gvfs liblcms2-utils systemd-container systemd-homed
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.922   systemd-userdbd systemd-boot systemd-resolved libfido2-1 libqrencode4
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.922   libtss2-esys-3.0.2-0 libtss2-mu0 libtss2-rc0 polkitd | policykit-1
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.922 Recommended packages:
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.922   librsvg2-common alsa-ucm-conf alsa-topology-conf at-spi2-core
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.923   libgdk-pixbuf2.0-bin libglib2.0-data xdg-user-dirs libgtk-3-bin krb5-locales
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.923   libgpm2 psmisc systemd-timesyncd | time-daemon libnss-systemd
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.923   libfile-mimeinfo-perl libnet-dbus-perl libx11-protocol-perl x11-utils
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 3.923   x11-xserver-utils
+2026-08-17T06:42:57.605000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.370 The following NEW packages will be installed:
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.371   adwaita-icon-theme at-spi2-common ca-certificates dbus dbus-bin dbus-daemon
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.371   dbus-session-bus-common dbus-system-bus-common dbus-user-session
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.371   dconf-gsettings-backend dconf-service dmsetup fontconfig fontconfig-config
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.372   fonts-liberation gtk-update-icon-cache hicolor-icon-theme libapparmor1
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.372   libargon2-1 libasound2 libasound2-data libatk-bridge2.0-0 libatk1.0-0
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.372   libatspi2.0-0 libavahi-client3 libavahi-common-data libavahi-common3
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.372   libbrotli1 libbsd0 libcairo-gobject2 libcairo2 libcolord2 libcryptsetup12
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.373   libcups2 libdatrie1 libdbus-1-3 libdconf1 libdeflate0 libdevmapper1.02.1
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.373   libdrm-common libdrm2 libepoxy0 libexpat1 libfdisk1 libfontconfig1
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.373   libfreetype6 libfribidi0 libgbm1 libgdk-pixbuf-2.0-0 libgdk-pixbuf2.0-common
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.373   libglib2.0-0 libgraphite2-3 libgssapi-krb5-2 libgtk-3-0 libgtk-3-common
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.374   libharfbuzz0b libicu72 libip4tc2 libjbig0 libjpeg62-turbo libjson-c5
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.374   libk5crypto3 libkeyutils1 libkmod2 libkrb5-3 libkrb5support0 liblcms2-2
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.374   liblerc4 libncursesw6 libnspr4 libnss3 libpam-systemd libpango-1.0-0
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.375   libpangocairo-1.0-0 libpangoft2-1.0-0 libpixman-1-0 libpng16-16 libproc2-0
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.375   libsqlite3-0 libssl3 libsystemd-shared libthai-data libthai0 libtiff6
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.375   libwayland-client0 libwayland-cursor0 libwayland-egl1 libwayland-server0
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.375   libwebp7 libx11-6 libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.376   libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 libxext6 libxfixes3 libxi6
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.376   libxinerama1 libxkbcommon0 libxml2 libxrandr2 libxrender1 openssl procps
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.376   shared-mime-info systemd systemd-sysv xdg-utils xkb-data
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.393 0 upgraded, 114 newly installed, 0 to remove and 0 not upgraded.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.393 Need to get 49.4 MB of archives.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.393 After this operation, 198 MB of additional disk space will be used.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.393 Get:1 http://deb.debian.org/debian bookworm/main arm64 libssl3 arm64 3.0.20-1~deb12u2 [1824 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.405 Get:2 http://deb.debian.org/debian bookworm/main arm64 libargon2-1 arm64 0~20171227-0.3+deb12u1 [18.7 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.406 Get:3 http://deb.debian.org/debian bookworm/main arm64 dmsetup arm64 2:1.02.185-2 [75.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.408 Get:4 http://deb.debian.org/debian bookworm/main arm64 libdevmapper1.02.1 arm64 2:1.02.185-2 [115 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.409 Get:5 http://deb.debian.org/debian bookworm/main arm64 libjson-c5 arm64 0.16-2 [42.9 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.410 Get:6 http://deb.debian.org/debian bookworm/main arm64 libcryptsetup12 arm64 2:2.6.1-4~deb12u2 [205 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.412 Get:7 http://deb.debian.org/debian bookworm/main arm64 libfdisk1 arm64 2.38.1-5+deb12u3 [182 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.414 Get:8 http://deb.debian.org/debian bookworm/main arm64 libkmod2 arm64 30+20221128-1 [54.4 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.415 Get:9 http://deb.debian.org/debian bookworm/main arm64 libapparmor1 arm64 3.0.8-3 [40.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.417 Get:10 http://deb.debian.org/debian bookworm/main arm64 libip4tc2 arm64 1.8.9-2 [18.5 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.418 Get:11 http://deb.debian.org/debian bookworm/main arm64 libsystemd-shared arm64 252.39-1~deb12u2 [1508 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.425 Get:12 http://deb.debian.org/debian bookworm/main arm64 systemd arm64 252.39-1~deb12u2 [2840 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.439 Get:13 http://deb.debian.org/debian bookworm/main arm64 systemd-sysv arm64 252.39-1~deb12u2 [42.9 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.440 Get:14 http://deb.debian.org/debian bookworm/main arm64 libdbus-1-3 arm64 1.14.10-1~deb12u1 [193 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.440 Get:15 http://deb.debian.org/debian bookworm/main arm64 dbus-bin arm64 1.14.10-1~deb12u1 [104 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.441 Get:16 http://deb.debian.org/debian bookworm/main arm64 dbus-session-bus-common all 1.14.10-1~deb12u1 [78.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.442 Get:17 http://deb.debian.org/debian bookworm/main arm64 libexpat1 arm64 2.5.0-1+deb12u2 [86.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.443 Get:18 http://deb.debian.org/debian bookworm/main arm64 dbus-daemon arm64 1.14.10-1~deb12u1 [176 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.445 Get:19 http://deb.debian.org/debian bookworm/main arm64 dbus-system-bus-common all 1.14.10-1~deb12u1 [79.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.447 Get:20 http://deb.debian.org/debian bookworm/main arm64 dbus arm64 1.14.10-1~deb12u1 [96.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.448 Get:21 http://deb.debian.org/debian bookworm/main arm64 libncursesw6 arm64 6.4-4 [122 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.449 Get:22 http://deb.debian.org/debian bookworm/main arm64 libproc2-0 arm64 2:4.0.2-3 [60.1 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.450 Get:23 http://deb.debian.org/debian bookworm/main arm64 procps arm64 2:4.0.2-3 [698 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.456 Get:24 http://deb.debian.org/debian bookworm/main arm64 openssl arm64 3.0.20-1~deb12u2 [1405 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.463 Get:25 http://deb.debian.org/debian-security bookworm-security/main arm64 ca-certificates all 20250419~deb12u1 [162 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.464 Get:26 http://deb.debian.org/debian bookworm/main arm64 libpam-systemd arm64 252.39-1~deb12u2 [210 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.465 Get:27 http://deb.debian.org/debian bookworm/main arm64 hicolor-icon-theme all 0.17-2 [11.4 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.466 Get:28 http://deb.debian.org/debian bookworm/main arm64 libgdk-pixbuf2.0-common all 2.42.10+dfsg-1+deb12u4 [307 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.468 Get:29 http://deb.debian.org/debian bookworm/main arm64 libglib2.0-0 arm64 2.74.6-2+deb12u9 [1316 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.474 Get:30 http://deb.debian.org/debian bookworm/main arm64 libicu72 arm64 72.1-3+deb12u1 [9202 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.511 Get:31 http://deb.debian.org/debian bookworm/main arm64 libxml2 arm64 2.9.14+dfsg-1.3~deb12u6 [620 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.514 Get:32 http://deb.debian.org/debian bookworm/main arm64 shared-mime-info arm64 2.2-1 [727 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.517 Get:33 http://deb.debian.org/debian bookworm/main arm64 libjpeg62-turbo arm64 1:2.1.5-2 [171 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.518 Get:34 http://deb.debian.org/debian bookworm/main arm64 libpng16-16 arm64 1.6.39-2+deb12u5 [270 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.520 Get:35 http://deb.debian.org/debian bookworm/main arm64 libdeflate0 arm64 1.14-1 [54.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.520 Get:36 http://deb.debian.org/debian bookworm/main arm64 libjbig0 arm64 2.1-6.1 [30.0 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.521 Get:37 http://deb.debian.org/debian bookworm/main arm64 liblerc4 arm64 4.0.0+ds-2 [138 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.522 Get:38 http://deb.debian.org/debian bookworm/main arm64 libwebp7 arm64 1.2.4-0.2+deb12u1 [260 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.524 Get:39 http://deb.debian.org/debian bookworm/main arm64 libtiff6 arm64 4.5.0-6+deb12u4 [301 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.525 Get:40 http://deb.debian.org/debian bookworm/main arm64 libgdk-pixbuf-2.0-0 arm64 2.42.10+dfsg-1+deb12u4 [130 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.526 Get:41 http://deb.debian.org/debian bookworm/main arm64 gtk-update-icon-cache arm64 3.24.38-2~deb12u3 [43.6 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.527 Get:42 http://deb.debian.org/debian bookworm/main arm64 adwaita-icon-theme all 43-1 [5124 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.547 Get:43 http://deb.debian.org/debian bookworm/main arm64 at-spi2-common all 2.46.0-5 [162 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.548 Get:44 http://deb.debian.org/debian bookworm/main arm64 dbus-user-session arm64 1.14.10-1~deb12u1 [78.1 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.549 Get:45 http://deb.debian.org/debian bookworm/main arm64 libdconf1 arm64 0.40.0-4 [39.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.550 Get:46 http://deb.debian.org/debian bookworm/main arm64 dconf-service arm64 0.40.0-4 [30.0 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.550 Get:47 http://deb.debian.org/debian bookworm/main arm64 dconf-gsettings-backend arm64 0.40.0-4 [26.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.551 Get:48 http://deb.debian.org/debian bookworm/main arm64 libbrotli1 arm64 1.0.9-2+b6 [269 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.552 Get:49 http://deb.debian.org/debian bookworm/main arm64 libfreetype6 arm64 2.12.1+dfsg-5+deb12u4 [368 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.556 Get:50 http://deb.debian.org/debian bookworm/main arm64 fonts-liberation all 1:1.07.4-11 [828 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.559 Get:51 http://deb.debian.org/debian bookworm/main arm64 fontconfig-config arm64 2.14.1-4 [315 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.561 Get:52 http://deb.debian.org/debian bookworm/main arm64 libfontconfig1 arm64 2.14.1-4 [381 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.563 Get:53 http://deb.debian.org/debian bookworm/main arm64 fontconfig arm64 2.14.1-4 [449 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.566 Get:54 http://deb.debian.org/debian bookworm/main arm64 libasound2-data all 1.2.8-1 [20.5 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.566 Get:55 http://deb.debian.org/debian bookworm/main arm64 libasound2 arm64 1.2.8-1+b1 [327 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.568 Get:56 http://deb.debian.org/debian bookworm/main arm64 libatk1.0-0 arm64 2.46.0-5 [47.4 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.570 Get:57 http://deb.debian.org/debian bookworm/main arm64 libxau6 arm64 1:1.0.9-1 [19.7 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.571 Get:58 http://deb.debian.org/debian bookworm/main arm64 libbsd0 arm64 0.11.7-2 [115 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.572 Get:59 http://deb.debian.org/debian bookworm/main arm64 libxdmcp6 arm64 1:1.1.2-3 [25.4 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.573 Get:60 http://deb.debian.org/debian bookworm/main arm64 libxcb1 arm64 1.15-1 [143 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.574 Get:61 http://deb.debian.org/debian bookworm/main arm64 libx11-data all 2:1.8.4-2+deb12u2 [292 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.576 Get:62 http://deb.debian.org/debian bookworm/main arm64 libx11-6 arm64 2:1.8.4-2+deb12u2 [735 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.581 Get:63 http://deb.debian.org/debian bookworm/main arm64 libxext6 arm64 2:1.3.4-1+b1 [51.7 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.585 Get:64 http://deb.debian.org/debian bookworm/main arm64 libxi6 arm64 2:1.8-1+b1 [82.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.586 Get:65 http://deb.debian.org/debian bookworm/main arm64 libatspi2.0-0 arm64 2.46.0-5 [71.0 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.588 Get:66 http://deb.debian.org/debian bookworm/main arm64 libatk-bridge2.0-0 arm64 2.46.0-5 [61.4 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.589 Get:67 http://deb.debian.org/debian bookworm/main arm64 libavahi-common-data arm64 0.8-10+deb12u1 [107 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.590 Get:68 http://deb.debian.org/debian bookworm/main arm64 libavahi-common3 arm64 0.8-10+deb12u1 [41.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.591 Get:69 http://deb.debian.org/debian bookworm/main arm64 libavahi-client3 arm64 0.8-10+deb12u1 [44.3 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.592 Get:70 http://deb.debian.org/debian bookworm/main arm64 libpixman-1-0 arm64 0.42.2-1 [470 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.599 Get:71 http://deb.debian.org/debian bookworm/main arm64 libxcb-render0 arm64 1.15-1 [115 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.600 Get:72 http://deb.debian.org/debian bookworm/main arm64 libxcb-shm0 arm64 1.15-1 [106 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.606 Get:73 http://deb.debian.org/debian bookworm/main arm64 libxrender1 arm64 1:0.9.10-1.1 [32.0 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.606 Get:74 http://deb.debian.org/debian bookworm/main arm64 libcairo2 arm64 1.16.0-7 [527 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.608 Get:75 http://deb.debian.org/debian bookworm/main arm64 libcairo-gobject2 arm64 1.16.0-7 [112 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.609 Get:76 http://deb.debian.org/debian bookworm/main arm64 liblcms2-2 arm64 2.14-2+deb12u1 [144 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.610 Get:77 http://deb.debian.org/debian bookworm/main arm64 libcolord2 arm64 1.4.6-2.2 [126 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.611 Get:78 http://deb.debian.org/debian bookworm/main arm64 libkrb5support0 arm64 1.20.1-2+deb12u5 [32.6 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.612 Get:79 http://deb.debian.org/debian bookworm/main arm64 libk5crypto3 arm64 1.20.1-2+deb12u5 [79.9 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.613 Get:80 http://deb.debian.org/debian bookworm/main arm64 libkeyutils1 arm64 1.6.3-2 [8844 B]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.614 Get:81 http://deb.debian.org/debian bookworm/main arm64 libkrb5-3 arm64 1.20.1-2+deb12u5 [316 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.618 Get:82 http://deb.debian.org/debian bookworm/main arm64 libgssapi-krb5-2 arm64 1.20.1-2+deb12u5 [124 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.619 Get:83 http://deb.debian.org/debian bookworm/main arm64 libcups2 arm64 2.4.2-3+deb12u9 [230 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.621 Get:84 http://deb.debian.org/debian bookworm/main arm64 libdatrie1 arm64 0.2.13-2+b1 [42.6 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.621 Get:85 http://deb.debian.org/debian bookworm/main arm64 libdrm-common all 2.4.114-1 [7112 B]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.622 Get:86 http://deb.debian.org/debian bookworm/main arm64 libdrm2 arm64 2.4.114-1+b1 [36.7 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.623 Get:87 http://deb.debian.org/debian bookworm/main arm64 libepoxy0 arm64 1.5.10-1 [198 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.624 Get:88 http://deb.debian.org/debian bookworm/main arm64 libfribidi0 arm64 1.0.8-2.1 [64.9 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.627 Get:89 http://deb.debian.org/debian bookworm/main arm64 libwayland-server0 arm64 1.21.0-1 [34.9 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.628 Get:90 http://deb.debian.org/debian bookworm/main arm64 libgbm1 arm64 22.3.6-1+deb12u2 [37.1 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.628 Get:91 http://deb.debian.org/debian bookworm/main arm64 libgraphite2-3 arm64 1.3.14-1+deb12u1 [68.7 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.629 Get:92 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz0b arm64 6.0.0+dfsg-3 [1914 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.639 Get:93 http://deb.debian.org/debian bookworm/main arm64 libthai-data all 0.1.29-1 [176 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.640 Get:94 http://deb.debian.org/debian bookworm/main arm64 libthai0 arm64 0.1.29-1 [56.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.641 Get:95 http://deb.debian.org/debian bookworm/main arm64 libpango-1.0-0 arm64 1.50.12+ds-1 [200 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.642 Get:96 http://deb.debian.org/debian bookworm/main arm64 libpangoft2-1.0-0 arm64 1.50.12+ds-1 [44.5 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.643 Get:97 http://deb.debian.org/debian bookworm/main arm64 libpangocairo-1.0-0 arm64 1.50.12+ds-1 [32.0 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.644 Get:98 http://deb.debian.org/debian bookworm/main arm64 libwayland-client0 arm64 1.21.0-1 [27.6 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.644 Get:99 http://deb.debian.org/debian bookworm/main arm64 libwayland-cursor0 arm64 1.21.0-1 [14.1 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.645 Get:100 http://deb.debian.org/debian bookworm/main arm64 libwayland-egl1 arm64 1.21.0-1 [8696 B]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.645 Get:101 http://deb.debian.org/debian bookworm/main arm64 libxcomposite1 arm64 1:0.4.5-1 [16.6 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.645 Get:102 http://deb.debian.org/debian bookworm/main arm64 libxfixes3 arm64 1:6.0.0-2 [22.9 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.646 Get:103 http://deb.debian.org/debian bookworm/main arm64 libxcursor1 arm64 1:1.2.1-1 [40.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.646 Get:104 http://deb.debian.org/debian bookworm/main arm64 libxdamage1 arm64 1:1.1.6-1 [15.2 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.647 Get:105 http://deb.debian.org/debian bookworm/main arm64 libxinerama1 arm64 2:1.1.4-3 [17.8 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.647 Get:106 http://deb.debian.org/debian bookworm/main arm64 xkb-data all 2.35.1-1 [764 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.652 Get:107 http://deb.debian.org/debian bookworm/main arm64 libxkbcommon0 arm64 1.5.0-1 [100 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.653 Get:108 http://deb.debian.org/debian bookworm/main arm64 libxrandr2 arm64 2:1.5.2-2+b1 [38.4 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.654 Get:109 http://deb.debian.org/debian bookworm/main arm64 libgtk-3-common all 3.24.38-2~deb12u3 [3895 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.682 Get:110 http://deb.debian.org/debian bookworm/main arm64 libgtk-3-0 arm64 3.24.38-2~deb12u3 [2620 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.695 Get:111 http://deb.debian.org/debian bookworm/main arm64 libnspr4 arm64 2:4.35-1 [105 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.695 Get:112 http://deb.debian.org/debian bookworm/main arm64 libsqlite3-0 arm64 3.40.1-2+deb12u2 [786 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.700 Get:113 http://deb.debian.org/debian-security bookworm-security/main arm64 libnss3 arm64 2:3.87.1-1+deb12u4 [1216 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.702 Get:114 http://deb.debian.org/debian bookworm/main arm64 xdg-utils all 1.1.3-4.1 [75.5 kB]
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.816 debconf: delaying package configuration, since apt-utils is not installed
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.841 Fetched 49.4 MB in 0s (154 MB/s)
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.877 Selecting previously unselected package libssl3:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.877 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6090 files and directories currently installed.)
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.880 Preparing to unpack .../00-libssl3_3.0.20-1~deb12u2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 4.892 Unpacking libssl3:arm64 (3.0.20-1~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.039 Selecting previously unselected package libargon2-1:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.041 Preparing to unpack .../01-libargon2-1_0~20171227-0.3+deb12u1_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.047 Unpacking libargon2-1:arm64 (0~20171227-0.3+deb12u1) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.084 Selecting previously unselected package dmsetup.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.084 Preparing to unpack .../02-dmsetup_2%3a1.02.185-2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.090 Unpacking dmsetup (2:1.02.185-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.132 Selecting previously unselected package libdevmapper1.02.1:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.133 Preparing to unpack .../03-libdevmapper1.02.1_2%3a1.02.185-2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.139 Unpacking libdevmapper1.02.1:arm64 (2:1.02.185-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.192 Selecting previously unselected package libjson-c5:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.193 Preparing to unpack .../04-libjson-c5_0.16-2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.198 Unpacking libjson-c5:arm64 (0.16-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.234 Selecting previously unselected package libcryptsetup12:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.235 Preparing to unpack .../05-libcryptsetup12_2%3a2.6.1-4~deb12u2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.239 Unpacking libcryptsetup12:arm64 (2:2.6.1-4~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.291 Selecting previously unselected package libfdisk1:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.293 Preparing to unpack .../06-libfdisk1_2.38.1-5+deb12u3_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.299 Unpacking libfdisk1:arm64 (2.38.1-5+deb12u3) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.350 Selecting previously unselected package libkmod2:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.351 Preparing to unpack .../07-libkmod2_30+20221128-1_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.355 Unpacking libkmod2:arm64 (30+20221128-1) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.408 Selecting previously unselected package libapparmor1:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.409 Preparing to unpack .../08-libapparmor1_3.0.8-3_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.412 Unpacking libapparmor1:arm64 (3.0.8-3) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.448 Selecting previously unselected package libip4tc2:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.449 Preparing to unpack .../09-libip4tc2_1.8.9-2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.456 Unpacking libip4tc2:arm64 (1.8.9-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.484 Selecting previously unselected package libsystemd-shared:arm64.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.486 Preparing to unpack .../10-libsystemd-shared_252.39-1~deb12u2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.490 Unpacking libsystemd-shared:arm64 (252.39-1~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.619 Setting up libssl3:arm64 (3.0.20-1~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.676 Selecting previously unselected package systemd.
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.677 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6176 files and directories currently installed.)
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.679 Preparing to unpack .../systemd_252.39-1~deb12u2_arm64.deb ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.692 Unpacking systemd (252.39-1~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 5.985 Setting up libargon2-1:arm64 (0~20171227-0.3+deb12u1) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.001 Setting up libjson-c5:arm64 (0.16-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.018 Setting up libfdisk1:arm64 (2.38.1-5+deb12u3) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.031 Setting up libkmod2:arm64 (30+20221128-1) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.047 Setting up libapparmor1:arm64 (3.0.8-3) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.062 Setting up libip4tc2:arm64 (1.8.9-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.077 Setting up libsystemd-shared:arm64 (252.39-1~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.093 Setting up libdevmapper1.02.1:arm64 (2:1.02.185-2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.109 Setting up libcryptsetup12:arm64 (2:2.6.1-4~deb12u2) ...
+2026-08-17T06:42:59.622000+00:00 7f702042-8c4a-455f-9cd4-d5768b8b4a02 #6 6.127 Setting up systemd (252.39-1~deb12u2) ...

@@ -1,0 +1,17 @@
+{
+  "targets": {
+    "default": {
+      "resources": {
+        "runtimes": {
+          "TutorAgent": {
+            "runtimeId": "TutorAgent_TutorAgent-l2APTZDP5L",
+            "runtimeArn": "arn:aws:bedrock-agentcore:us-west-2:385168913936:runtime/TutorAgent_TutorAgent-l2APTZDP5L",
+            "roleArn": "arn:aws:iam::385168913936:role/AgentCore-TutorAgent-defa-ApplicationAgentTutorAgen-VJCQsQNmrBpe"
+          }
+        },
+        "stackName": "AgentCore-TutorAgent-default",
+        "deployHash": "add93d65e55f0b71"
+      }
+    }
+  }
+}

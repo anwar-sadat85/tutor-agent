@@ -9,7 +9,7 @@ async function main() {
   const worksheet = await generateWorksheet({
     yearLevel: 6,
     recentTopics,
-    region: 'ap-southeast-2',
+    region: 'us-west-2',
   });
 
   console.log('=== TITLE ===');

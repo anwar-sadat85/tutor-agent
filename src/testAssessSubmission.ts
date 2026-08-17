@@ -13,7 +13,7 @@ const PASS_THRESHOLD = 0.7; // 70% of questions correct — adjust as needed
 
 async function generateAndSaveNextWorksheet(): Promise<GeneratedWorksheet> {
   const recentTopics = await loadRecentTopics();
-  const worksheet = await generateWorksheet({ yearLevel: 6, recentTopics, region: 'ap-southeast-2' });
+  const worksheet = await generateWorksheet({ yearLevel: 6, recentTopics, region: 'us-west-2' });
   await writeFile(WORKSHEET_JSON_PATH, JSON.stringify(worksheet, null, 2));
   await addTopic(worksheet.topic);
 
@@ -64,7 +64,7 @@ async function main() {
   const assessment = await assessSubmission({
     worksheet,
     imagePaths,
-    region: 'ap-southeast-2',
+    region: 'us-west-2',
   });
 
   console.log('=== LEGIBILITY ===');

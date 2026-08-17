@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.agentcore.aws.dev/v1/agentcore.json",
+  "name": "TutorAgent",
+  "version": 1,
+  "managedBy": "CDK",
+  "tags": {
+    "agentcore:created-by": "agentcore-cli",
+    "agentcore:project-name": "TutorAgent"
+  },
+  "runtimes": [
+    {
+      "name": "TutorAgent",
+      "build": "Container",
+      "entrypoint": "main.js",
+      "codeLocation": "app/TutorAgent/",
+      "runtimeVersion": "NODE_22",
+      "networkMode": "PUBLIC",
+      "protocol": "HTTP",
+      "environmentVariables": {
+        "TUTOR_SENDER_EMAIL": "anwar.sadat85@gmail.com"
+      }
+    }
+  ],
+  "memories": [],
+  "knowledgeBases": [],
+  "credentials": [],
+  "evaluators": [],
+  "onlineEvalConfigs": [],
+  "agentCoreGateways": [],
+  "policyEngines": [],
+  "configBundles": [],
+  "abTests": [],
+  "harnesses": [],
+  "datasets": [],
+  "payments": []
+}
