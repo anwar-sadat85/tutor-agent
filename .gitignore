@@ -38,3 +38,6 @@ npm-debug.log*
 
 # Policy files
 *policy.json
+
+TutorAgent/agentcore/agentcore.json
+TutorAgent/agentcore/aws-targets.json
