@@ -1,17 +1,62 @@
-# Tutor POC — Local Test Harness
+# Tutor
+
+Tutor is a quiet AI tutor that emails reading comprehension worksheets, grades photographed
+handwritten answers, and sends the next task or a completion email — no app, no dashboard,
+just email. Built on the Strands Agents SDK (TypeScript) and Amazon Bedrock, deployed on
+Amazon Bedrock AgentCore Runtime.
+
+This repo has three parts:
+
+| Location | What it is |
+|---|---|
+| `/` (here) | Local, no-AWS-infra test harness — where the core logic was originally proven out |
+| [`TutorAgent/`](TutorAgent/README.md) | The deployed AgentCore agent — all the tools, the two conversation flows, the Dockerfile |
+| [`TutorAgent/tutor-infra/`](TutorAgent/tutor-infra/README.md) | The CDK stack that triggers the agent automatically — DynamoDB, both Lambdas, SES, S3 |
+
+## System overview
+
+**Enrollment** (manual, one-time per student): a record is written to DynamoDB
+(`studentId`, `email`, `yearLevel`, `passCount: 0`, `completed: false`). Everything after
+this is automatic.
+
+```
+DynamoDB write (new student)
+  → DynamoDB Stream → new-student-trigger Lambda
+      → AgentCore (TutorAgent) — Flow A
+          → generate_worksheet → update_student_state → render_worksheet_pdf
+          → send_assignment_email
+                                                              ↓
+                                                    student receives worksheet PDF
+
+student photographs their answers, replies by email
+  → SES (domain: anwar.nz) → S3 (raw email) → submission-trigger Lambda
+      → AgentCore (TutorAgent) — Flow B
+          → get_submission_image → assess_submission
+              ├─ illegible → request stays silent, no state change, student resends
+              └─ legible → select_next_assignment → update_student_state
+                  ├─ not yet 5 passes → Flow A again (next worksheet, new topic)
+                  └─ 5 passes reached → send_completion_email, loop ends
+```
+
+Every step above — generation, PDF rendering, grading, email in/out, state
+tracking — is a Strands tool the agent calls itself; nothing in this loop is scripted or
+manually triggered once a student is enrolled. See `TutorAgent/README.md` for the full
+tool list and both flows in detail, and `TutorAgent/tutor-infra/README.md` for how the
+triggers are wired up (and the considerable number of AWS-specific gotchas found getting
+there — SES domain verification needing two regions, `cmd.exe` silently corrupting env
+vars, a CloudFormation rollback edge case, and more).
+
+## What's in this root-level harness
 
 Local, no-AWS-infra test harness for Tutor's core logic: generate a Year 6 reading
 comprehension worksheet, render it to PDF, grade a photographed answer sheet against it,
 and decide what happens next — all run by hand from the CLI against Bedrock directly (no
 DynamoDB, Lambda, SES, or AgentCore Runtime).
 
-The deployed, fully working end-to-end system (AgentCore Runtime, DynamoDB student state,
-SES email in/out — enrollment through grading through completion) lives in
-[`TutorAgent/`](TutorAgent/README.md) — see that project's README (and
-`TutorAgent/tutor-infra/README.md`) for the production architecture and deployment. This
-root-level harness is where the core logic (`generateWorksheet`, `renderWorksheetPdf`,
+This is where the core logic (`generateWorksheet`, `renderWorksheetPdf`,
 `assessSubmission`, `selectNextAssignment`) was originally proven out locally before being
-copied into `TutorAgent/app/TutorAgent/` and wired up as agent tools.
+copied into `TutorAgent/app/TutorAgent/` and wired up as agent tools. Useful for quickly
+iterating on generation quality or grading behavior without a deploy cycle.
 
 ## Setup
 

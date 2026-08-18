@@ -106,91 +106,66 @@ agentcore invoke "Generate and send a worksheet for studentId=test-001, email=..
 Invokes the deployed agent directly — useful for testing the `generate → render → send`
 chain in isolation, without the DynamoDB/Lambda trigger path.
 
-## Known issues and gotchas (things that broke, and the fixes)
+## Deploying and testing the full end-to-end system
 
-These were hard-won during initial deployment — worth keeping so they don't get
-rediscovered from scratch:
+`TutorAgent` alone can only be invoked manually (above). To get the actual automatic
+behaviour — a DynamoDB write triggering everything else — `tutor-infra` has to be deployed
+too, and it needs this agent's Runtime ARN to do it. Order matters:
 
-- **Windows: `agentcore dev` fails with `spawn npx ENOENT`.** This is a real bug in the
-  CLI on Windows (Node's `spawn()` doesn't resolve `.cmd` shims without `shell: true`).
-  Workaround used: skip `agentcore dev` entirely and run the agent directly with
-  `npx tsx watch main.ts` from `app/TutorAgent/`, then `curl` the `/invocations`
-  endpoint directly (with `Content-Type: application/json`, `Accept: text/event-stream`,
-  and an `x-amzn-bedrock-agentcore-runtime-session-id` header).
+**1. Deploy this project first** (per Setup/Deployment above), then grab its Runtime ARN:
+```bash
+agentcore status
+# or:
+aws bedrock-agentcore-control list-agent-runtimes --region us-west-2 \
+  --query "agentRuntimes[?agentRuntimeName=='TutorAgent_TutorAgent'].agentRuntimeArn" --output text
+```
 
-- **Bedrock model IDs need a region-specific inference profile prefix**, not the bare
-  model ID (e.g. `us.anthropic.claude-sonnet-4-6`, not `anthropic.claude-sonnet-4-6`).
-  Confirm via `aws bedrock list-inference-profiles --region <region>`.
+**2. Deploy `tutor-infra`**, passing that ARN and your sender/receiving domain in:
+```bash
+cd tutor-infra
+npm install
+export AGENT_RUNTIME_ARN="<arn from step 1>"
+export TUTOR_SENDER_EMAIL="tutor@yourdomain.com"
+export TUTOR_RECEIVING_DOMAIN="yourdomain.com"
+npx cdk bootstrap aws://<account>/us-west-2   # one-time per account/region
+npx cdk deploy
+```
+See `tutor-infra/README.md` for the SES domain verification and IAM permission steps this
+needs before it'll actually work (both are one-time setup per AWS account).
 
-- **Docker Hub rate limiting (`429 Too Many Requests`) when CodeBuild pulls `node:22-slim`.**
-  Fixed by pulling the base image from ECR Public instead:
-  `public.ecr.aws/docker/library/node:22-slim`.
+**3. Test the whole loop by writing one new student record to DynamoDB** — nothing else,
+no `agentcore invoke`, no manual trigger:
+```bash
+aws dynamodb put-item --table-name TutorStudents --region us-west-2 --item \
+  '{"studentId": {"S": "e2e-test-001"}, "email": {"S": "your-real-email@example.com"}, "yearLevel": {"N": "6"}, "passCount": {"N": "0"}, "completed": {"BOOL": false}}'
+```
+Use a fresh, never-before-used `studentId` each time you re-test — DynamoDB Streams only
+fires on a genuine `INSERT`, so re-writing an existing `studentId` won't trigger anything.
 
-- **Puppeteer's bundled Chromium fails on Linux ARM** with
-  `Syntax error: word unexpected (expecting ")")` — the downloaded Chrome-for-Testing
-  binary is a bash-syntax wrapper script that fails under Debian's default `dash` shell.
-  Fixed by skipping Puppeteer's own download (`PUPPETEER_SKIP_DOWNLOAD=true`) and using
-  an apt-installed system Chromium instead (`apt-get install chromium`, then
-  `PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium`), with `--no-sandbox
-  --disable-setuid-sandbox --disable-dev-shm-usage` launch args required for running as
-  a non-root container user.
+**4. Watch it happen, in a second terminal:**
+```bash
+aws logs tail /aws/lambda/tutor-new-student-trigger --region us-west-2 --follow
+```
+Within a few seconds you should see the Stream event picked up and an AgentCore invocation
+fire — then check the inbox at the email you used in step 3 for the actual worksheet PDF.
 
-- **Never pass large binary content (e.g. a rendered PDF) as a tool-call argument.**
-  Originally `render_worksheet_pdf` returned base64-encoded PDF bytes for
-  `send_assignment_email` to consume — this caused a ~2–3 minute hang with no visible
-  error, because the model had to *generate* that entire base64 string token-by-token as
-  part of producing the next tool call. Fixed by having `render_worksheet_pdf` return
-  only a file path (`/tmp/worksheet-<timestamp>.pdf`), and `send_assignment_email` reads
-  the file from disk directly inside its own tool callback.
+**5. To test the reply/grading half (Flow B):** answer the worksheet by hand on a separate
+numbered sheet (question number, then answer, one per line), photograph it, and reply to
+the worksheet email — sending your reply to the same `tutor@` address `TUTOR_SENDER_EMAIL`
+used. Watch the other Lambda:
+```bash
+aws logs tail /aws/lambda/tutor-submission-trigger --region us-west-2 --follow
+```
+A graded result should follow within roughly a minute, and either a new worksheet email or
+(at 5 passes) a completion email should arrive.
 
-- **AgentCore's `environmentVariables` field (as documented in `agentcore.json`'s schema)
-  silently does nothing for application-level agents — root cause found.** Confirmed via
-  `aws bedrock-agentcore-control get-agent-runtime ... --query "environmentVariables"`
-  returning `null` even after redeploying with the field present. Traced the actual deploy
-  path (`agentcore.json` → the CLI's generated `agentcore/cdk/lib/cdk-stack.ts` →
-  `AgentCoreApplication` → the `@aws/agentcore-cdk` L3 constructs) and found the real
-  cause: the construct that actually wires environment variables through
-  (`AgentCoreRuntime.js`, which correctly reads a top-level `environmentVariables` prop)
-  is only ever instantiated for **MCP server runtimes** (`McpRuntimeCompute.js`) — the
-  application/agent runtime construct (`AgentCoreApplication.js`) never references
-  `environmentVariables` at all. Separately, the schema (`agent-env.js`) shows the field
-  the agent-level construct actually reads is `envVars` — an **array** of `{name, value}`
-  objects, not `environmentVariables` as an object map:
-  ```json
-  "envVars": [
-    { "name": "TUTOR_SENDER_EMAIL", "value": "tutor@anwar.nz" }
-  ]
-  ```
-  `agentcore validate` accepts either field name silently (Zod doesn't reject unknown
-  extra keys), so the wrong field produces no error — it just never propagates. Switching
-  to `envVars` with the correct `{name, value}` array shape fixed it; confirmed via the
-  same `get-agent-runtime` query and in the console (Runtime → version → Advanced
-  configurations → Environment variables). `@aws/agentcore-cdk` was at `0.1.0-alpha.45`
-  at the time — plausible this gets fixed upstream in a later version, worth checking
-  `npm outdated @aws/agentcore-cdk` from `agentcore/cdk/` occasionally.
-
-- **A student created via `agentcore invoke` directly (not through the real DynamoDB-first
-  enrollment pipeline) can end up with no `email` attribute in DynamoDB**, and therefore
-  be invisible to the `EmailIndex` GSI that Flow B's inbound path depends on. Cause: the
-  system prompt's Flow A originally only told the agent to persist `currentWorksheet` and
-  `topicHistory` via `update_student_state` — never `email` — and separately,
-  `updateStudentStateTool`'s Zod schema didn't even accept an `email` field at all, so
-  even after the prompt was corrected to mention it, the tool would have silently
-  rejected/dropped it. Both are fixed now (prompt says to always include `email`; the
-  tool schema accepts it) — but this only matters going forward for students created via
-  ad-hoc `agentcore invoke` testing. In the real pipeline, students are always created via
-  `dynamodb put-item` first (with `email` included), and `update_student_state`'s merge
-  semantics (`SET` only touches fields explicitly provided) mean `email` survives Flow A's
-  updates regardless.
-  by default.** Each new tool needing AWS access failed with `AccessDenied` until granted
-  explicitly. Initially fixed with manual `aws iam put-role-policy` calls during
-  development (untracked, directly editing a CDK-managed role); **later moved into
-  tracked IaC** — `tutor-infra/lib/tutor-infra-stack.ts` now imports this role by name
-  (`iam.Role.fromRoleName`) and attaches three standalone `iam.Policy` resources
-  (`TutorSESSendPolicy`, `TutorDynamoDBStatePolicy`, `TutorS3InboundReadPolicy`) to it.
-  The manual inline policies were deleted first (`aws iam delete-role-policy`) to avoid
-  a name collision before deploying the CDK-tracked versions. See `tutor-infra/README.md`
-  for the actual policy definitions.
+**6. Confirm state directly, if you want to check without waiting on email:**
+```bash
+aws dynamodb get-item --table-name TutorStudents --region us-west-2 \
+  --key '{"studentId": {"S": "e2e-test-001"}}'
+```
+Look for `currentWorksheet` (the full worksheet + answer key, persisted right after
+generation) and `passCount`/`completed` (updated right after grading).
 
 ## Status
 
