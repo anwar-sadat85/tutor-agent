@@ -41,3 +41,7 @@ npm-debug.log*
 
 TutorAgent/agentcore/agentcore.json
 TutorAgent/agentcore/aws-targets.json
+
+# Drawio tmp
+*.drawio.dtmp
+*.drawio.bkp

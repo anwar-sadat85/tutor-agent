@@ -40,7 +40,11 @@ student photographs their answers, replies by email
 
 Every step above — generation, PDF rendering, grading, email in/out, state
 tracking — is a Strands tool the agent calls itself; nothing in this loop is scripted or
-manually triggered once a student is enrolled. See `TutorAgent/README.md` for the full
+manually triggered once a student is enrolled.
+
+![Tutor architecture diagram](architecture/tutor-agent.drawio.png)
+
+See `TutorAgent/README.md` for the full
 tool list and both flows in detail, and `TutorAgent/tutor-infra/README.md` for how the
 triggers are wired up (and the considerable number of AWS-specific gotchas found getting
 there — SES domain verification needing two regions, `cmd.exe` silently corrupting env
