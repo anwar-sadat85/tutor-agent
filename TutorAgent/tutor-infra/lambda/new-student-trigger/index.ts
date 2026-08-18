@@ -1,4 +1,5 @@
 import type { DynamoDBStreamHandler } from 'aws-lambda';
+import { randomUUID } from 'crypto';
 import {
   BedrockAgentCoreClient,
   InvokeAgentRuntimeCommand,
@@ -33,11 +34,21 @@ export const handler: DynamoDBStreamHandler = async (event) => {
 
     console.log(`New student enrolled: ${studentId} (${email}), year ${yearLevel}`);
 
-    const sessionId = `enroll-${studentId}-${Date.now()}`;
+    // AgentCore requires runtimeSessionId to be at least 33 characters.
+    // A UUID (36 chars) safely satisfies this regardless of studentId length
+    // or timestamp — string concatenation (e.g. `enroll-${studentId}-${Date.now()}`)
+    // can land just under the limit depending on studentId length.
+    const sessionId = `enroll-${randomUUID()}`;
 
     const command = new InvokeAgentRuntimeCommand({
       agentRuntimeArn: AGENT_RUNTIME_ARN,
       runtimeSessionId: sessionId,
+      // Both required — without contentType the runtime returns 415, without
+      // accept it returns 406. The deployed agent's server only supports
+      // streaming (SSE) responses, confirmed earlier via direct curl testing.
+      contentType: 'application/json',
+      accept: 'text/event-stream',
+      qualifier: 'DEFAULT',
       payload: new TextEncoder().encode(
         JSON.stringify({
           prompt:
@@ -50,9 +61,15 @@ export const handler: DynamoDBStreamHandler = async (event) => {
 
     try {
       const response = await client.send(command);
+      // Consume the full streamed response — the agent's actual work
+      // (generate → render → send) happens during this stream, so the
+      // Lambda must wait for it to finish rather than returning as soon as
+      // headers arrive.
+      const textResponse = await response.response?.transformToString();
       console.log('AgentCore invocation succeeded', {
         studentId,
         statusCode: response.statusCode,
+        response: textResponse,
       });
     } catch (err) {
       // Let this throw so the Lambda records a failure — DynamoDB Streams

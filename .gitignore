@@ -35,3 +35,6 @@ Thumbs.db
 
 # Logs
 npm-debug.log*
+
+# Policy files
+*policy.json

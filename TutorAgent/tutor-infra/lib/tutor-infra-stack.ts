@@ -1,32 +1,30 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import * as path from 'path';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as lambda from 'aws-cdk-lib/aws-lambda-nodejs';
+import { OutputFormat } from 'aws-cdk-lib/aws-lambda-nodejs';
 import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as ses from 'aws-cdk-lib/aws-ses';
+import * as sesActions from 'aws-cdk-lib/aws-ses-actions';
 import { Runtime, StartingPosition } from 'aws-cdk-lib/aws-lambda';
 
-// Set these before deploying. For a POC, SES starts in "sandbox" mode —
-// both the sender AND recipient addresses must be verified identities
-// until you request production access.
+// Sender and recipient SES identities are already verified manually via the
+// console (not managed by this stack — CDK's ses.EmailIdentity would
+// conflict with the existing verified identities). Kept here only for the
+// SenderEmail output below.
 const SENDER_EMAIL = process.env.TUTOR_SENDER_EMAIL ?? 'tutor@example.com';
-const STUDENT_EMAIL = process.env.TUTOR_STUDENT_EMAIL ?? 'student@example.com';
+// Recipient replies arrive at this domain — SES inbound receiving requires a
+// domain you control (not a Gmail address), verified manually via the SES
+// console per the earlier decision. Only used here to build the receipt
+// rule's recipient condition.
+const RECEIVING_DOMAIN = process.env.TUTOR_RECEIVING_DOMAIN ?? 'anwar.nz';
 
 export class TutorInfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
-    // ---- SES: verify sender and (while in sandbox) recipient identities ----
-    new ses.EmailIdentity(this, 'SenderIdentity', {
-      identity: ses.Identity.email(SENDER_EMAIL),
-    });
-    new ses.EmailIdentity(this, 'StudentIdentity', {
-      identity: ses.Identity.email(STUDENT_EMAIL),
-    });
-    // Note: CDK/CloudFormation can create the identity and trigger the
-    // verification email, but actually clicking the verification link is a
-    // manual step — check the inbox for both addresses after first deploy.
 
     // ---- DynamoDB: student state, with Streams enabled for enrollment ----
     const studentsTable = new dynamodb.Table(this, 'TutorStudents', {
@@ -38,15 +36,35 @@ export class TutorInfraStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
+    // GSI keyed by email — the submission trigger Lambda receives the SES
+    // event's "from" address and needs to look up which student that
+    // corresponds to, but the table's only natively keyed by studentId.
+    studentsTable.addGlobalSecondaryIndex({
+      indexName: 'EmailIndex',
+      partitionKey: { name: 'email', type: dynamodb.AttributeType.STRING },
+    });
+
     // ---- New Student Trigger Lambda ----
     // Fires on INSERT events from the stream, invokes the deployed AgentCore
     // agent to generate and send the student's first worksheet.
     const newStudentTrigger = new lambda.NodejsFunction(this, 'NewStudentTrigger', {
       functionName: 'tutor-new-student-trigger',
       runtime: Runtime.NODEJS_22_X,
-      entry: 'lambda/new-student-trigger/index.ts',
+      entry: path.join(__dirname, '..', 'lambda', 'new-student-trigger', 'index.ts'),
       handler: 'handler',
-      timeout: cdk.Duration.seconds(60),
+      timeout: cdk.Duration.seconds(120),
+      // Default 128MB was too low — hit Runtime.OutOfMemory during init,
+      // before the handler even ran, likely from the AWS SDK's module
+      // loading footprint (@aws-sdk/client-bedrock-agentcore is sizeable).
+      memorySize: 256,
+      // Explicit CJS output — auto-detection can pick up "type": "module"
+      // from a parent directory's package.json (this project is nested
+      // inside TutorAgent/, whose app/TutorAgent/package.json sets
+      // "type": "module"), producing a bundle whose export shape Lambda's
+      // runtime doesn't recognize as exporting `handler`.
+      bundling: {
+        format: OutputFormat.CJS,
+      },
       environment: {
         // Set this after `agentcore deploy` gives you the runtime ARN.
         // Left blank here deliberately — filled in via GitHub Actions or
@@ -74,6 +92,85 @@ export class TutorInfraStack extends cdk.Stack {
       })
     );
 
+    // ---- Inbound email: S3 bucket for raw SES-delivered emails ----
+    const inboundEmailBucket = new s3.Bucket(this, 'InboundEmailBucket', {
+      bucketName: `tutor-inbound-email-${this.account}-${this.region}`,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true, // POC convenience — real student submissions, but easy to tear down
+      // SES needs to be able to write objects into this bucket.
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+    });
+    // SES's S3 action requires this bucket policy — the SES service principal
+    // must be allowed to PutObject, scoped to this specific account (via
+    // condition) to avoid any other AWS account's SES being able to write here.
+    inboundEmailBucket.addToResourcePolicy(
+      new iam.PolicyStatement({
+        actions: ['s3:PutObject'],
+        principals: [new iam.ServicePrincipal('ses.amazonaws.com')],
+        resources: [inboundEmailBucket.arnForObjects('*')],
+        conditions: {
+          StringEquals: { 'aws:Referer': this.account },
+        },
+      })
+    );
+
+    // ---- Submission Trigger Lambda ----
+    // Fires on the S3 event notification for each new inbound email object.
+    // Identifies the student from the sender's email address (via the
+    // EmailIndex GSI) and invokes AgentCore to grade the submission.
+    const submissionTrigger = new lambda.NodejsFunction(this, 'SubmissionTrigger', {
+      functionName: 'tutor-submission-trigger',
+      runtime: Runtime.NODEJS_22_X,
+      entry: path.join(__dirname, '..', 'lambda', 'submission-trigger', 'index.ts'),
+      handler: 'handler',
+      timeout: cdk.Duration.seconds(120),
+      memorySize: 256, // same rationale as NewStudentTrigger — AWS SDK init footprint
+      bundling: {
+        format: OutputFormat.CJS, // same rationale as NewStudentTrigger — nested project structure
+      },
+      environment: {
+        AGENT_RUNTIME_ARN: process.env.AGENT_RUNTIME_ARN ?? '',
+        STUDENTS_TABLE_NAME: studentsTable.tableName,
+        EMAIL_INDEX_NAME: 'EmailIndex',
+        INBOUND_BUCKET_NAME: inboundEmailBucket.bucketName,
+      },
+    });
+
+    submissionTrigger.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ['bedrock-agentcore:InvokeAgentRuntime'],
+        resources: ['*'],
+      })
+    );
+    // Needs to query the EmailIndex GSI to reverse-lookup studentId from the
+    // sender's email address.
+    studentsTable.grantReadData(submissionTrigger);
+
+    // ---- SES: receipt rule set ----
+    // Only one active receipt rule set is allowed per account/region — this
+    // creates and activates one dedicated to Tutor.
+    const receiptRuleSet = new ses.ReceiptRuleSet(this, 'TutorReceiptRuleSet', {
+      receiptRuleSetName: 'tutor-receipt-rules',
+    });
+
+    receiptRuleSet.addRule('SubmissionRule', {
+      recipients: [RECEIVING_DOMAIN],
+      actions: [
+        // Order matters: S3 first (durably store the raw email), then
+        // Lambda (react to it). If the Lambda action ran first and failed,
+        // the S3 copy would still exist for retry/debugging; this ordering
+        // guarantees that.
+        new sesActions.S3({
+          bucket: inboundEmailBucket,
+          objectKeyPrefix: 'incoming/',
+        }),
+        new sesActions.Lambda({
+          function: submissionTrigger,
+          invocationType: sesActions.LambdaInvocationType.EVENT, // async, don't block SES
+        }),
+      ],
+    });
+
     // ---- Outputs ----
     new cdk.CfnOutput(this, 'StudentsTableName', { value: studentsTable.tableName });
     new cdk.CfnOutput(this, 'StudentsTableStreamArn', {
@@ -82,6 +179,10 @@ export class TutorInfraStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'NewStudentTriggerFunctionName', {
       value: newStudentTrigger.functionName,
     });
+    new cdk.CfnOutput(this, 'SubmissionTriggerFunctionName', {
+      value: submissionTrigger.functionName,
+    });
+    new cdk.CfnOutput(this, 'InboundEmailBucketName', { value: inboundEmailBucket.bucketName });
     new cdk.CfnOutput(this, 'SenderEmail', { value: SENDER_EMAIL });
   }
 }

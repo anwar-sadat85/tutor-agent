@@ -15,7 +15,7 @@ const sesClient = new SESClient({
   }),
 });
 
-const SENDER_EMAIL = process.env.TUTOR_SENDER_EMAIL ?? 'anwar.sadat85@gmail.com';
+const SENDER_EMAIL = process.env.TUTOR_SENDER_EMAIL ?? 'tutor@anwar.nz';
 
 export interface SendAssignmentEmailOptions {
   studentEmail: string;

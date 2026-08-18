@@ -156,7 +156,9 @@ rediscovered from scratch:
 
 ## Status
 
-End-to-end `generate_worksheet → render_worksheet_pdf → send_assignment_email` confirmed
-working against the real deployed AgentCore Runtime, with an email successfully
-delivered via SES. The DynamoDB → Lambda → AgentCore automatic trigger path
-(`tutor-infra`) has not yet been deployed or tested.
+End-to-end confirmed working, fully automatically: writing a new student record to
+DynamoDB → Stream event → Lambda → AgentCore invocation → `generate_worksheet` →
+`render_worksheet_pdf` → `send_assignment_email`, with the email physically delivered.
+No manual `agentcore invoke` involved — the whole chain fires from a single
+`aws dynamodb put-item` call. See `tutor-infra/README.md` for the Lambda/CDK-side
+gotchas found getting that trigger path working.

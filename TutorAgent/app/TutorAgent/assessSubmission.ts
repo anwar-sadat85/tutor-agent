@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import { Agent, BedrockModel, TextBlock, ImageBlock } from '@strands-agents/sdk';
 import { z } from 'zod';
-import type { GeneratedWorksheet } from './generateWorksheet.js';
+import { getStudentState } from './studentState.js';
 
 function inferenceProfilePrefix(region: string): string {
   if (region === 'ap-southeast-2') return 'au';
@@ -13,10 +13,9 @@ function inferenceProfilePrefix(region: string): string {
   );
 }
 
+const PASS_THRESHOLD = 0.7; // 70% of questions correct — adjust as needed
+
 // ---- Structured output schema ---------------------------------------------
-// Matches the assess_submission contract locked in the spec: submission-level
-// legibility gate, missing answers treated as intentional (graded incorrect,
-// not flagged), content-only feedback (no handwriting-quality commentary).
 
 const PerQuestionResultSchema = z.object({
   number: z.number(),
@@ -46,6 +45,11 @@ export const AssessmentSchema = z.object({
 
 export type Assessment = z.infer<typeof AssessmentSchema>;
 
+export interface AssessSubmissionResult extends Assessment {
+  passed: boolean;
+  totalQuestions: number;
+}
+
 const SYSTEM_PROMPT = `You are grading a Year 6 student's handwritten answers to a reading
 comprehension worksheet. The student photographed or scanned a separate answer sheet where
 they wrote the question number followed by their answer for each question.
@@ -74,26 +78,33 @@ Your job, in order:
 
 3. Content-only grading. Do NOT comment on, score, or mention handwriting neatness, letter
    formation, or presentation in any way, in the feedback or anywhere else. Only assess
-   whether the content of each answer is correct. If a word is only readable because you
-   inferred it from context despite messy writing, that is a legibility/confidence matter,
-   not something to note as a presentation issue.
+   whether the content of each answer is correct.
 
 4. Ambiguous words: if a word's spelling is imperfect but the intended answer is clearly
    readable and correct in meaning, mark it correct — do not penalise minor spelling errors
    in a reading comprehension context unless the grading notes say otherwise.
 
-5. Feedback should be brief, encouraging, and content-focused — e.g. "Good detail in Q3,
-   take another look at Q5" — never anything evaluative about handwriting itself.
+5. Feedback should be brief, encouraging, and content-focused — never anything evaluative
+   about handwriting itself.
 
 Return only the structured assessment.`;
 
 export async function assessSubmission(options: {
-  worksheet: GeneratedWorksheet;
+  studentId: string;
   imagePaths: string[];
   region: string;
   modelId?: string;
-}): Promise<Assessment> {
-  const { worksheet, imagePaths, region, modelId } = options;
+}): Promise<AssessSubmissionResult> {
+  const { studentId, imagePaths, region, modelId } = options;
+
+  const state = await getStudentState(studentId);
+  const worksheet = state.currentWorksheet;
+  if (!worksheet) {
+    throw new Error(
+      `No currentWorksheet found for studentId=${studentId} — cannot grade without a ` +
+        `worksheet on record. This student may not have been sent a worksheet yet.`
+    );
+  }
 
   const imageBlocks = await Promise.all(
     imagePaths.map(async (imagePath) => {
@@ -139,5 +150,12 @@ export async function assessSubmission(options: {
     { structuredOutputSchema: AssessmentSchema }
   );
 
-  return result.structuredOutput as Assessment;
+  const assessment = result.structuredOutput as Assessment;
+  const totalQuestions = worksheet.questions.length;
+  const passed =
+    assessment.legible &&
+    assessment.confidence !== 'low' &&
+    assessment.overallScore / totalQuestions >= PASS_THRESHOLD;
+
+  return { ...assessment, passed, totalQuestions };
 }
