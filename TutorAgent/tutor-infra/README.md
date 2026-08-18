@@ -1,9 +1,10 @@
 # tutor-infra
 
-CDK stack providing the **automatic enrollment trigger** for Tutor: a DynamoDB table
-(with Streams enabled) holding student state, and a Lambda that fires on new student
-enrollment, invoking the deployed `TutorAgent` AgentCore Runtime to generate and send
-that student's first worksheet.
+CDK stack providing the **automatic triggers** for Tutor: a DynamoDB table holding student
+state, a Lambda that fires on new student enrollment (generates + sends the first
+worksheet), and the inbound-email path that grades a student's photographed submission —
+SES receipt rule → S3 (raw email) → Lambda → AgentCore, all invoking the deployed
+`TutorAgent` AgentCore Runtime.
 
 This is a separate CDK app from `TutorAgent/` (the AgentCore agent itself) and is
 deployed independently — `TutorAgent` must already be deployed first, since this stack
@@ -14,9 +15,10 @@ needs its Runtime ARN.
 ```
 tutor-infra/
 ├── bin/tutor-infra.ts          # CDK app entry point
-├── lib/tutor-infra-stack.ts    # DynamoDB table, Lambda, event source mapping, IAM
-└── lambda/new-student-trigger/
-    └── index.ts                 # The actual trigger Lambda handler
+├── lib/tutor-infra-stack.ts    # DynamoDB table + GSI, both Lambdas, S3 bucket, SES receipt rule, IAM
+└── lambda/
+    ├── new-student-trigger/index.ts   # Fires on DynamoDB Stream INSERT — generate + send first worksheet
+    └── submission-trigger/index.ts    # Fires on inbound-email S3 PutObject — grade a submitted photo
 ```
 
 Note: this project is nested inside `TutorAgent/` on disk
@@ -25,13 +27,27 @@ Note: this project is nested inside `TutorAgent/` on disk
 ## What it deploys
 
 - **DynamoDB table** (`TutorStudents`) — partition key `studentId`, Streams enabled
-  (`NEW_IMAGE`)
+  (`NEW_IMAGE`), plus a **GSI** (`EmailIndex`, partition key `email`) so the submission
+  Lambda can reverse-lookup `studentId` from an inbound email's sender address
 - **Lambda** (`tutor-new-student-trigger`) — subscribed to the table's stream,
   filters to `INSERT` events only, invokes the AgentCore Runtime
+- **S3 bucket** (`tutor-inbound-email-<account>-<region>`) — durable storage for raw
+  inbound emails, written by SES before the Lambda runs; `DESTROY`/auto-delete removal
+  policy (POC convenience, not for production)
+- **SES receipt rule set** (`tutor-receipt-rules`, one rule `SubmissionRule`) — the only
+  active rule set for the account/region; routes mail for `TUTOR_RECEIVING_DOMAIN` through
+  two ordered actions: S3 (store raw email under `incoming/<messageId>`), then Lambda
+  (async invoke)
+- **Lambda** (`tutor-submission-trigger`) — fires on that SES→Lambda action, extracts the
+  sender address from the raw email, looks up `studentId` via the `EmailIndex` GSI, and
+  invokes the AgentCore Runtime with the S3 bucket/key so the agent can pull the photo and
+  grade it (Flow B in `TutorAgent/README.md`)
 
 SES identities (sender + recipient) are **not** managed by this stack — they were
 verified manually via the SES console, since verifying them again through CDK's
-`ses.EmailIdentity` conflicts with identities that already exist.
+`ses.EmailIdentity` conflicts with identities that already exist. Inbound receiving also
+requires a domain you control (not a plain Gmail address) — `TUTOR_RECEIVING_DOMAIN`
+defaults to `anwar.nz`.
 
 ## Deployment
 
@@ -39,7 +55,7 @@ verified manually via the SES console, since verifying them again through CDK's
 npm install
 export AGENT_RUNTIME_ARN="arn:aws:bedrock-agentcore:us-west-2:<account>:runtime/<runtime-id>"
 export TUTOR_SENDER_EMAIL="..."
-export TUTOR_STUDENT_EMAIL="..."
+export TUTOR_RECEIVING_DOMAIN="..."   # domain you control, for inbound SES receiving
 npx cdk bootstrap aws://<account>/us-west-2   # one-time per account/region
 npx cdk deploy
 ```
@@ -55,6 +71,14 @@ aws logs tail /aws/lambda/tutor-new-student-trigger --region us-west-2 --follow
 
 Use a fresh `studentId` each time — DynamoDB Streams only fires on genuine `INSERT`,
 so re-using an existing ID won't retrigger anything.
+
+To test the submission path, email a photo of a completed worksheet to an address at
+`TUTOR_RECEIVING_DOMAIN` from the address stored as that student's `email` in DynamoDB,
+then tail the other Lambda:
+
+```bash
+aws logs tail /aws/lambda/tutor-submission-trigger --region us-west-2 --follow
+```
 
 ## Known issues and gotchas
 
@@ -110,10 +134,15 @@ genuinely distinct bugs. In the order they were found:
 
 ## Status
 
-Confirmed working end-to-end: a `dynamodb put-item` call triggers the Lambda, which
-successfully invokes the deployed `TutorAgent` AgentCore Runtime, which generates,
-renders, and emails a worksheet — with the email physically delivered. No manual
-`agentcore invoke` involved.
+**Enrollment trigger** — confirmed working end-to-end: a `dynamodb put-item` call triggers
+`tutor-new-student-trigger`, which successfully invokes the deployed `TutorAgent`
+AgentCore Runtime, which generates, renders, and emails a worksheet — with the email
+physically delivered. No manual `agentcore invoke` involved.
+
+**Submission trigger** — deployed (S3 bucket, SES receipt rule, `EmailIndex` GSI,
+`tutor-submission-trigger` Lambda all synth/deploy cleanly), but not yet confirmed
+end-to-end via a real inbound email the way the enrollment path has been. See
+`TutorAgent/README.md`'s Status section for the same caveat from the agent side.
 
 ## Not yet done
 
@@ -124,3 +153,5 @@ renders, and emails a worksheet — with the email physically delivered. No manu
 - `AGENT_RUNTIME_ARN` is passed as a shell env var at deploy time — fine for manual
   deploys, but would need a different mechanism (SSM parameter, CDK cross-stack
   reference, etc.) for CI/CD.
+- The submission trigger path (SES → S3 → Lambda → AgentCore grading) hasn't had a real
+  end-to-end test with an actual inbound email yet — worth doing before relying on it.
