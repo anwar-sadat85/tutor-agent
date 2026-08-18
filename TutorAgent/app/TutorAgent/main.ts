@@ -10,6 +10,7 @@ import { updateStudentStateTool } from './tools/updateStudentStateTool.js';
 import { assessSubmissionTool } from './tools/assessSubmissionTool.js';
 import { selectNextAssignmentTool } from './tools/selectNextAssignmentTool.js';
 import { getSubmissionImageTool } from './tools/getSubmissionImageTool.js';
+import { sendCompletionEmailTool } from './tools/sendCompletionEmailTool.js';
 
 // Define a collection of tools used by the model.
 // No MCP clients — Tutor doesn't use any external MCP tools (e.g. web search).
@@ -22,6 +23,7 @@ const tools: ToolList = [
   assessSubmissionTool,
   selectNextAssignmentTool,
   getSubmissionImageTool,
+  sendCompletionEmailTool,
 ];
 
 const SYSTEM_PROMPT = `You are Tutor, a background agent that generates and sends reading
@@ -74,8 +76,9 @@ FLOW B — Grade a submitted answer sheet
    complete (5 passes required) — it does not persist anything itself.
 6. Call update_student_state with the studentId, the new passCount, and the completed value
    from step 5.
-7. If completed is true, STOP HERE — do not send another worksheet. The student has finished
-   the programme.
+7. If completed is true, call send_completion_email with the student's email (from the
+   get_student_state call in step 4) and the final passCount from step 5, then STOP HERE —
+   do not send another worksheet. The student has finished the programme.
 8. If completed is false, generate and send the next worksheet by following steps 1–5 of
    FLOW A (still call get_student_state again first for the freshest topicHistory, since it
    may have been updated in step 6 above).

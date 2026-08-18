@@ -5,12 +5,13 @@ comprehension worksheet, render it to PDF, grade a photographed answer sheet aga
 and decide what happens next — all run by hand from the CLI against Bedrock directly (no
 DynamoDB, Lambda, SES, or AgentCore Runtime).
 
-The deployed, end-to-end version of this agent (AgentCore Runtime, DynamoDB student state,
-SES email in/out) lives in [`TutorAgent/`](TutorAgent/README.md) — see that project's
-README for the production architecture and deployment. This root-level harness is where
-the core logic (`generateWorksheet`, `renderWorksheetPdf`, `assessSubmission`,
-`selectNextAssignment`) was originally proven out locally before being copied into
-`TutorAgent/app/TutorAgent/` and wired up as agent tools.
+The deployed, fully working end-to-end system (AgentCore Runtime, DynamoDB student state,
+SES email in/out — enrollment through grading through completion) lives in
+[`TutorAgent/`](TutorAgent/README.md) — see that project's README (and
+`TutorAgent/tutor-infra/README.md`) for the production architecture and deployment. This
+root-level harness is where the core logic (`generateWorksheet`, `renderWorksheetPdf`,
+`assessSubmission`, `selectNextAssignment`) was originally proven out locally before being
+copied into `TutorAgent/app/TutorAgent/` and wired up as agent tools.
 
 ## Setup
 
